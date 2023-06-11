@@ -67,11 +67,13 @@
 
         // 动态加载不同的CSS文件
         if (isMobile) {
+            let screen = "Mobile";
             let link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = 'mobile.css';
             document.head.appendChild(link);
         } else {
+            let screen = "Desktop";
             let link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = 'desktop.css';
@@ -89,9 +91,91 @@
         }
 
         .search {
+            height: 8rem;
+            width: 32rem;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: content-box;
+            border: 0.2rem solid #dfe1e5;
+            border-radius: 100rem;
+            transition: 0.7s var(--default-bezier-ios-end);
+        }
+
+        .search-focus {
+            box-shadow: 0 0 1rem var(--shadow-1);
+            border-color: rgba(223, 225, 229, 0);
+            transition: 1s var(--default-bezier-ios-start);
+        }
+
+        .search:hover>.input-box {
+            transition: 1s var(--default-bezier-ios-start);
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            transition: 1s var(--default-bezier-ios-end);
+        }
+
+        .input {
+            width: 100%;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            margin: 0 0 0 3rem;
+            font-size: 2rem;
+        }
+
+        .button-box {
+            position: relative;
+            width: 8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button {
+            position: absolute;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 100%;
+            border: var(--default-color) 0.5rem solid;
+            box-sizing: border-box;
+            background-color: transparent;
+            outline: none;
+            animation: 4s breathe var(--default-bezier-start) infinite;
+            transition: 1s var(--default-bezier-start);
+        }
+
+        .button:hover {
+            opacity: 1;
+        }
+
+        .button-breathe {
+            position: absolute;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 100%;
+            border: var(--default-color) 0.5rem solid;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+            50% {
+                filter: blur(0.5rem);
+            }
+        }
+
+        .search {
             background-color: var(--box-white-1);
             -webkit-backdrop-filter: blur(20px)saturate(180%);
             backdrop-filter: blur(20px)saturate(180%);
+        }
+
+        .input {
+            color: var(--text-black-1);
         }
 
         .img {
@@ -115,7 +199,7 @@
     <div class="bg">
         <div class="img" id="para"></div>
         <div class="search" id="search">
-            <div class="input-box">
+            <div class="input-box" id="input_box">
                 <input class="input" id="input" placeholder="Search" onkeydown="Enter()" />
             </div>
             <div class="button-box">
@@ -133,6 +217,10 @@
             para.classList.add('img-focus');
             let search = document.querySelector('#search');
             search.classList.add('search-focus');
+            if (screen = "Mobile") {
+                document.getElementById("input_box").style.width = "24rem";
+            }else{
+                document.getElementById("input_box").style.width = "60em";}
         });
 
         input.addEventListener('blur', function () {
@@ -140,6 +228,7 @@
             para.classList.remove('img-focus');
             let search = document.querySelector('#search');
             search.classList.remove('search-focus');
+            document.getElementById("input_box").style.width = "";
         });
         function Enter() {
             if (event.keyCode == 13) {
