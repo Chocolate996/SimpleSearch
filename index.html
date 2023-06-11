@@ -54,8 +54,8 @@
             --default-bezier-color: cubic-bezier(.6, 0, .5, 1);
             --default-bezier-start: cubic-bezier(.5, 0, .25, 1);
             --default-bezier-end: cubic-bezier(.5, 0, .5, 1);
-            --default-bezier-in: cubic-bezier(.15,.78,.35,1);
-            --default-bezier-out: cubic-bezier(.65,0,.86,.29);
+            --default-bezier-in: cubic-bezier(.15, .78, .35, 1);
+            --default-bezier-out: cubic-bezier(.65, 0, .86, .29);
             --default-bezier-ios-start: cubic-bezier(.25, 1, .25, 1);
             --default-bezier-ios-end: cubic-bezier(.48, 1.23, .25, 1);
             --default-bezier-apple-nav: cubic-bezier(0.28, 0.11, 0.32, 1);
@@ -114,7 +114,7 @@
 <body>
     <div class="bg">
         <div class="img" id="para"></div>
-        <div class="search">
+        <div class="search" id="search">
             <div class="input-box">
                 <input class="input" id="input" placeholder="Search" onkeydown="Enter()" />
             </div>
@@ -131,11 +131,15 @@
         input.addEventListener('focus', function () {
             let para = document.querySelector('#para');
             para.classList.add('img-focus');
+            let search = document.querySelector('#search');
+            search.classList.add('search-focus');
         });
 
         input.addEventListener('blur', function () {
-        let para = document.querySelector('#para');
-        para.classList.remove('img-focus');
+            let para = document.querySelector('#para');
+            para.classList.remove('img-focus');
+            let search = document.querySelector('#search');
+            search.classList.remove('search-focus');
         });
         function Enter() {
             if (event.keyCode == 13) {

@@ -15,7 +15,7 @@
     transition: 0.7s var(--default-bezier-ios-end);
 }
 
-.search:hover {
+.search-focus {
     transform: translateY(-20rem);
     width: 48rem;
     box-shadow: 0 0 1rem var(--shadow-1);
