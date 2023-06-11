@@ -1,0 +1,86 @@
+:root {
+    font-size: 6px;
+}
+
+.search {
+    position: relative;
+    color: #202124;
+    display: flex;
+    justify-content: space-between;
+    height: 8rem;
+    width: 32rem;
+    box-sizing: content-box;
+    border: 0.2rem solid #dfe1e5;
+    border-radius: 100rem;
+    transition: 0.7s var(--default-bezier-ios-end);
+}
+
+.search:hover {
+    transform: translateY(-20rem);
+    width: 48rem;
+    box-shadow: 0 0 1rem var(--shadow-1);
+    border-color: rgba(223, 225, 229, 0);
+    transition: 1s var(--default-bezier-ios-start);
+}
+
+.search:hover>.input-box {
+    width: 40rem;
+    transition: 1s var(--default-bezier-ios-start);
+}
+
+.input-box {
+    width: 24rem;
+    display: flex;
+    align-items: center;
+    transition: 1s var(--default-bezier-ios-end);
+}
+
+.input {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    margin: 0 0 0 3rem;
+    font-size: 2rem;
+}
+
+.button-box {
+    position: relative;
+    width: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    border: var(--default-color) 0.5rem solid;
+    box-sizing: border-box;
+    background-color: transparent;
+    outline: none;
+    animation: 4s breathe var(--default-bezier-start) infinite;
+    transition: 1s var(--default-bezier-start);
+}
+
+.button:hover {
+    opacity: 1;
+}
+
+.button-breathe {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    border: var(--default-color) 0.5rem solid;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+@keyframes breathe {
+    50% {
+        filter: blur(0.5rem);
+    }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Simple Search</title>
+    <style>
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: unset;
+        }
+
+        :root {
+            --default-color: #4f9fe9;
+            --default-color-light: #2389e9;
+
+            --text-white: rgb(255, 255, 255);
+            --text-white-1: rgba(255, 255, 255, 0.75);
+            --text-white-2: rgba(255, 255, 255, 0.50);
+            --text-white-3: rgba(255, 255, 255, 0.25);
+            --text-black: rgb(0, 0, 0);
+            --text-black-1: rgba(0, 0, 0, 0.80);
+            --text-black-2: rgba(0, 0, 0, 0.50);
+            --text-black-3: rgba(0, 0, 0, 0.25);
+
+            --box-white: rgba(255, 255, 255, 1);
+            --box-white-1: rgba(255, 255, 255, 0.75);
+            --box-white-2: rgba(255, 255, 255, 0.50);
+            --box-white-3: rgba(255, 255, 255, 0.30);
+            --box-white-4: rgba(255, 255, 255, 0.25);
+            --box-white-5: rgba(255, 255, 255, 0.15);
+            --box-white-6: rgba(255, 255, 255, 0.10);
+            --box-black: rgba(0, 0, 0, 1);
+            --box-black-1: rgba(0, 0, 0, 0.75);
+            --box-black-2: rgba(0, 0, 0, 0.50);
+            --box-black-3: rgba(0, 0, 0, 0.25);
+            --box-black-4: rgba(0, 0, 0, 0.15);
+            --box-black-5: rgba(0, 0, 0, 0.10);
+
+            --shadow-1: rgba(0, 0, 0, 0.25);
+            --shadow-2: rgba(0, 0, 0, 0.20);
+            --shadow-3: rgba(0, 0, 0, 0.15);
+            --shadow-4: rgba(0, 0, 0, 0.10);
+            --shadow-5: rgba(0, 0, 0, 0.05);
+
+            /* 祖传动画曲线 */
+            --default-bezier-color: cubic-bezier(.6, 0, .5, 1);
+            --default-bezier-start: cubic-bezier(.5, 0, .25, 1);
+            --default-bezier-end: cubic-bezier(.5, 0, .5, 1);
+            --default-bezier-in: cubic-bezier(.15,.78,.35,1);
+            --default-bezier-out: cubic-bezier(.65,0,.86,.29);
+            --default-bezier-ios-start: cubic-bezier(.25, 1, .25, 1);
+            --default-bezier-ios-end: cubic-bezier(.48, 1.23, .25, 1);
+            --default-bezier-apple-nav: cubic-bezier(0.28, 0.11, 0.32, 1);
+        }
+    </style>
+    <script>
+        // 判断设备类型
+        let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // 动态加载不同的CSS文件
+        if (isMobile) {
+            let link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'mobile.css';
+            document.head.appendChild(link);
+        } else {
+            let link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'desktop.css';
+            document.head.appendChild(link);
+        }
+    </script>
+    <style>
+        .bg {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .search {
+            background-color: var(--box-white-1);
+            -webkit-backdrop-filter: blur(20px)saturate(180%);
+            backdrop-filter: blur(20px)saturate(180%);
+        }
+
+        .img {
+            position: absolute;
+            width: 101%;
+            height: 101%;
+            background-size: cover;
+            background-position: center;
+            background-image: url(https://bing.shangzhenyang.com/api/1080p);
+            transition: 1s var(--default-bezier-in);
+        }
+
+        .img-focus {
+            transform: scale(150%);
+            filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <div class="img" id="para"></div>
+        <div class="search">
+            <div class="input-box">
+                <input class="input" id="input" placeholder="Search" onkeydown="Enter()" />
+            </div>
+            <div class="button-box">
+                <div class="button-breathe"></div>
+                <button class="button" onclick="EnterBox()"></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let input = document.querySelector('#input');
+        let status = document.querySelector('#status');
+
+        input.addEventListener('focus', function () {
+            let para = document.querySelector('#para');
+            para.classList.add('img-focus');
+        });
+
+        input.addEventListener('blur', function () {
+        let para = document.querySelector('#para');
+        para.classList.remove('img-focus');
+        });
+        function Enter() {
+            if (event.keyCode == 13) {
+                var get = document.getElementById("input").value;
+                var encode = encodeURI(get.split(' ').reverse().join(' '));
+                window.location.href = "https://www.baidu.com/s?ie=UTF-8&wd=" + encode;
+            }
+        }
+        function EnterBox() {
+            var get = document.getElementById("input").value;
+            var encode = encodeURI(get.split(' ').reverse().join(' '));
+            window.location.href = "https://www.baidu.com/s?ie=UTF-8&wd=" + encode;
+        }
+    </script>
+</body>
+
+</html>
